@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Link
+Icon[en_CA]=gnome-panel-launcher
+URL=___URL___
+Name[en_CA]=___NAME___
+Name=___NAME___
+Icon=/usr/share/icons/Humanity/places/64/network-server.svg

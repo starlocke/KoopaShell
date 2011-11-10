@@ -1,0 +1,27 @@
+#!/bin/bash
+###############################################################################
+# Author: Victor Yap <victor.yap@alumni.concordia.ca>
+# Purpose:
+#   To automate writing to /etc/hostname and /etc/hosts before changing
+#   the hostname on Debian systems.
+#
+#   After using, just re-login to see the new hostname as part of your
+#   shell.
+###############################################################################
+SELF="$(basename $0)"
+
+if [ ! $1 ]
+  then
+    echo -e "Usage:\n\t$SELF NEW_HOSTNAME"
+fi
+
+if [ $1 ]
+  then
+    OLDHOSTNAME=`awk '{print $1}' /etc/hostname`
+    NEWHOSTNAME=$1
+    sed -i "s/.*/$NEWHOSTNAME/g" /etc/hostname
+    sed -i "s/127.0.1.1\t$OLDHOSTNAME.*/127.0.1.1\t$NEWHOSTNAME.lan\t$NEWHOSTNAME/g" /etc/hosts
+    hostname -F /etc/hostname
+    echo -e "Hostname set to: $NEWHOSTNAME"
+fi
+

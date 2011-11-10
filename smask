@@ -1,0 +1,26 @@
+#!/bin/bash
+###############################################################################
+# Author: Victor Yap <victor.yap@alumni.concordia.ca>
+# Purpose:
+#   An easier way to set "group-friendly" permissions recursively.
+###############################################################################
+
+function usage
+{
+  echo "usage: smask [file] [group]"
+}
+
+if [ -z $1 ]; then
+  usage
+  exit 1
+fi
+
+if [ -z $2 ]; then
+  usage
+  exit 1
+fi
+
+chgrp -R $2 $1
+find $1 -type f -exec chmod ug+rw {} \;
+find $1 -type d -exec chmod ug+rwx {} \;
+find $1 -type d -exec chmod g+s {} \;

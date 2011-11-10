@@ -1,0 +1,33 @@
+#!/bin/bash
+###############################################################################
+# Author: Victor Yap <victor.yap@alumni.concordia.ca>
+# Purpose:
+#   To automate creation of .desktop server shortcuts that can be sorted into
+#   subfolders.
+#
+#   This system is intended as a replacement for Nautilus Bookmarks.
+###############################################################################
+
+function usage
+{
+  echo -e "usage:\n\tmkfav [NAME] [URL]\n"
+  echo -e "example:"
+  echo -e "\tmkfav sftp://user@example.com:22/home/user/ user@example.com"
+}
+
+if [ -z $1 ]; then
+  usage
+  exit 1
+fi
+
+if [ -z $2 ]; then
+  usage
+  exit 1
+fi
+
+DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ ! -d "$HOME/Favourites" ]; then
+  mkdir -p "$HOME/Favourites"
+fi
+cp "$DIR/.mkfav/default.template.txt" "$HOME/Favourites/$1.desktop"
+sed -i -e "s/___NAME___/$1/g" -e "s%___URL___%$2%g" "$HOME/Favourites/$1.desktop"
