@@ -12,7 +12,7 @@ function usage
 {
   echo -e "usage:\n\tmkfav [NAME] [URL]\n"
   echo -e "example:"
-  echo -e "\tmkfav sftp://user@example.com:22/home/user/ user@example.com"
+  echo -e "\tmkfav user@example.com sftp://user@example.com:22/home/user/"
 }
 
 if [ -z $1 ]; then
