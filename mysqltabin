@@ -41,7 +41,7 @@ EOT;
 foreach($tables as $table){
     $table = trim($table, "` \n");
     echo <<<EOT
-\! echo "\n********** {$table} **********";
+\\! echo "\\n********** {$table} **********";
 {$header}
 LOAD DATA LOCAL INFILE '{$table}.txt' INTO TABLE {$table};
 {$footer}
