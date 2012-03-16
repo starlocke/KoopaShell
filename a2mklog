@@ -1,0 +1,28 @@
+#!/bin/bash
+###############################################################################
+# Author: Victor Yap <victor.yap@alumni.concordia.ca>
+# Purpose:
+#   Wrapper for the routine/chore of creating those apache2 log files.
+###############################################################################
+
+
+function usage
+{
+  echo -e "usage:\n\ta2mklog [domain] [group]\n"
+  echo -e "example:"
+  echo -e "\ta2mklog www.example.com adm"
+}
+
+if [ -z $1 ]; then
+  usage
+  exit 1
+fi
+
+if [ -z $2 ]; then
+  usage
+  exit 1
+fi
+
+sudo mkdir -p /var/log/apache2/$1
+sudo chgrp $2 /var/log/apache2/$1
+
