@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 class SplitMysqlDump{
   var $fh; // file handle
@@ -11,8 +12,8 @@ class SplitMysqlDump{
     echo "===splitmysqldump.php===\n";
     if(empty($argv[1])){
       echo <<<EOT
-    Usage:
-      php splitmysqldump.php [FILE]
+Usage:
+  splitmysqldump.php [FILE]
 
 EOT;
       exit(__LINE__);
@@ -24,7 +25,7 @@ EOT;
   function open($file){
     if(!is_file($file) || is_dir($file)){
       echo <<<EOT
-    File not found: {$argv[1]}
+    File not found: {$file}
 
 EOT;
       exit(__LINE__);
