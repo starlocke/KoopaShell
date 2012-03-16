@@ -1,0 +1,54 @@
+#!/usr/bin/php
+<?php
+$file = null;
+$tables = array();
+if(!empty($argv[1])){
+  if(is_file($argv[1]) && !is_dir($argv[1])){
+    $file = $argv[1];
+    $tables = file($file);
+  }
+  else {
+    echo <<<EOT
+Specifying a file name:
+  $ php mysqltabin.php [file]
+
+Piping a list of table names:
+  $ <piping source> | php mysqltabin.php
+
+EOT;
+    exit;
+  }
+}
+else {
+  $stream = fopen('php://stdin', 'r');
+  while($line = fgets($stream)){
+    $tables[] = $line;
+  }
+}
+
+$header = <<<EOT
+SET FOREIGN_KEY_CHECKS = 0;
+SET UNIQUE_CHECKS = 0;
+SET AUTOCOMMIT = 0;
+EOT;
+
+$footer = <<<EOT
+SET UNIQUE_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 1;
+COMMIT;
+EOT;
+
+foreach($tables as $table){
+    $table = trim($table, "` \n");
+    echo <<<EOT
+\! echo "\n********** {$table} **********";
+{$header}
+LOAD DATA LOCAL INFILE '{$table}.txt' INTO TABLE {$table};
+{$footer}
+
+
+EOT;
+
+}
+
+?>
