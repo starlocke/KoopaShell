@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CERT="/etc/ssh/ssh_host_rsa_key.pub"
+
+if [ "$1" != "" ]
+  then
+    CERT="$1"
+fi
+
+echo "Reading '$CERT'..."
+
+ssh-keygen -lf $CERT | awk '{print $2}' | sed 's/://g' | tr 'a-f' 'A-F'
+
