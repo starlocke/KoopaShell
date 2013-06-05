@@ -1,0 +1,15 @@
+#!/bin/bash
+###############################################################################
+# Author: Victor Yap <victor.yap@alumni.concordia.ca>
+# Purpose:
+#   Shortcut to "recursively search files and list them with 'less' pagination.
+#
+# Example:
+#   grep! -e "foo"
+#   grep! -e "foo" -i
+###############################################################################
+if [ ! -f "$HOME/.grep!" ]; then
+    touch "$HOME/.grep!"
+fi
+grep ./ -rn --color=always --exclude-from="$HOME/.grep!" "$@" | less -R
+
