@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# # filename: setbadge
+
+# usage: "setbadge 'some_purpose'"
+
+# iTerm (for "macOS") helper to set a "badge".
+# A badge is like a "window title" but proprietary to iTerm.
+# Helps to "stamp" the "purpose" of various terminals in
+# each of their respective top-right corners (background).
+
+args=("$@")
+
+printf "\e]1337;SetBadgeFormat=%s\a" \
+  $(echo -n "${args[0]}" | base64)
