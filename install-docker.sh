@@ -19,5 +19,5 @@ then
     chmod +x /usr/local/bin/docker-compose
 else
     echo "Docker Signing Key Invalid."
-    echo "Failure. Quitting.
+    echo "Failure. Quitting."
 fi
