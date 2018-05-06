@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# This is for Debian
+
+# wget https://raw.githubusercontent.com/starlocke/KoopaShell/master/install-docker.sh
+# chmod +x install-docker.sh
+# sudo install-docker.sh
+
 apt-get update
 apt-get install -y \
     apt-transport-https \
